@@ -4,3 +4,7 @@
 // const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&sortBy=publishedAt&apiKey=${apiKey}`;
     // 
 
+// const homePage = 
+const countrySelect = document.querySelector('#country');
+console.log(countrySelect.textContent);
+ 
