@@ -4,6 +4,9 @@ const countrySelect = document.querySelector('#country');
 const languageSelect = document.querySelector('#lang');
 const search = document.querySelector('#search');
 const searchBar = document.querySelector('.searchbar');
+const leftsec = document.querySelector('#leftsec')
+const home = document.querySelector('#home')
+const close = document.querySelector('#close');
 // top three
 const three = document.querySelector('#week')
 // top five
@@ -11,7 +14,23 @@ const five = document.querySelector('#today');
 
 const categories = document.querySelectorAll('.btn')
 
+const hideShow = document.querySelector('#image')
 
+if (window.innerWidth <= 780) {
+    leftsec.classList.add('hide')
+    // hideShow.addEventListener('click', () => {
+
+    // })
+}
+hideShow.addEventListener('click',() => {
+        leftsec.classList.remove('hide')
+    leftsec.style.display = 'flex' 
+   
+})
+close.addEventListener('click',() => {
+    leftsec.style.display = 'none' 
+
+})
 // for category
 
 categories.forEach((button) => {
@@ -26,6 +45,10 @@ let pageSize = 10;
 
 five.addEventListener('click', () => {
 pageSize = 5
+updateNews()
+})
+home.addEventListener('click', () => {
+pageSize = 10
 updateNews()
 })
 three.addEventListener('click', () => {
@@ -101,7 +124,7 @@ const updateNews = async () => {
     const articles = await fetchNews();
     displayNews(articles);
 };
-
+    
 
 
 // for all country, and langs
