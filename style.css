@@ -167,8 +167,10 @@ main{
     margin: 30px 0 0 30px;
     height: 80vh;
     width: 78vw;
-    overflow: hidden;
+    /* overflow: hidden; */
+    overflow-y: scroll;
     padding: 10px;
+
 }
 
 .news-cont{
@@ -190,6 +192,9 @@ main{
     align-content: center;
   height: 100%;
   width: 6rem;
+}
+#img-id img{
+    max-width: 100%;
 }
 .news-detcont{
    width: 100%;
