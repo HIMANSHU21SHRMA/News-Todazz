@@ -2,7 +2,7 @@ const apiKey = 'pub_51648486486e376f6b0e3018fc06fada8084d';
 const newCont = document.querySelector('#rightsec');
 const countrySelect = document.querySelector('#country');
 const languageSelect = document.querySelector('#lang');
-const search = document.querySelector('#search');
+const searchbtn = document.querySelector('#search');
 const searchBar = document.querySelector('.searchbar');
 const leftsec = document.querySelector('#leftsec')
 const home = document.querySelector('#home')
@@ -59,19 +59,23 @@ updateNews()
 
 // fetching....
 
-const fetchNews = async(category = 'top ') => {
+const fetchNews = async(category = 'top ', query = '') => {
 const country = countrySelect.value;
 const language = languageSelect.value;
 
 // try, catch
 
 try {
-    const apiUrl = `https://newsdata.io/api/1/latest?apikey=${apiKey}&country=${country}&language=${language}&category=${category}&size=${pageSize}&`
+    let apiUrl = `https://newsdata.io/api/1/latest?apikey=${apiKey}&country=${country}&language=${language}&category=${category}&size=${pageSize}&`
+
+    if (query) {
+        apiUrl = `https://newsdata.io/api/1/latest?apikey=${apiKey}&q=${query}&language=${language}&country=${country}&size=${pageSize}`;
+    }
 
 
     const responce = await fetch(apiUrl);
     const data = await responce.json();
-    console.log(data);
+    // console.log(data);
     // console.log(data.results.length);
     
     
@@ -130,6 +134,24 @@ const updateNews = async () => {
 // for all country, and langs
 countrySelect.addEventListener('change',updateNews);
 languageSelect.addEventListener('change',updateNews);
+
+// for qurey
+searchbtn.addEventListener('click', async() => {
+    const query = searchBar.value.trim();
+    if (query) {
+        const articles = await fetchNews('', query);
+        displayNews(articles);
+    }
+})
+searchBar.addEventListener('keypress', async(e) => {
+if (e.key === 'Enter') {
+    const query =  searchBar.value.trim();
+    if (query) {
+        const articles = await fetchNews('', query)
+        displayNews(articles);
+    }
+}
+})
 
 
 
